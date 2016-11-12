@@ -54,7 +54,7 @@ class Player extends PluginBase implements Listener{
 		$this->saveConfig();
 		$this->getServer()->getLogger()->info(TextFormat::GREEN . "[ 환영말 ] EGC Plugin stop");
 	}
-}//클래스
+}
 /*
  * 명령어추가 하기
  * 콘피그 추가하기..
