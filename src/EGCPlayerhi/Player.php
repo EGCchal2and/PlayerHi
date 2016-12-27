@@ -13,6 +13,8 @@ class Player extends PluginBase implements Listener{
 	public $plconfig;
 	public $plconfigData;
 	
+	public $plugin_version;
+	
 	public function onLoad(){
 		$this->getServer()->getLogger()->info(TextFormat::GREEN . "[ 환영말 ] Player Hi 로드중 버전 1.0.0");
 		$this->getServer()->getLogger()->info(TextFormat::BLUE . "[ 환영말 ] EGC Plugin start");
@@ -28,6 +30,12 @@ class Player extends PluginBase implements Listener{
 "message" => "§b님이 게임을 종료하셨습니다."
 			] );
 			$this->plconfigData = $this->plconfig->getAll();
+			$this->plugin_version = $this->getDescription()->getVersion();
+			$version = json_decode(Utils::getURL("https://raw.githubusercontent.com/EGCchal2and/versions/master/pluginversion.json"), true);
+			if($this->plugin_version < $version["PlayerHi"]){
+				$this->getLogger()->notice("PlayerHi 업데이트 되었습니다.");
+				$this->getLogger()->notice("기존버전: ".$this->plugin_version.", 업데이트버전: ".$version["PlayerHi"]);
+			}
 			
 			$this->getServer()->getPluginManager()->registerEvents($this, $this);
 			$this->getServer()->getLogger()->critical(TextFormat::RED . "[ 환영말 ]경고 : 이플러그인은 EGC-EULA로 보호 받고있습니다. 후원을 받으려면 카톡cmj12030으로 오셔서 합의를 보셔야 합니다. 합의금 : 만원");
@@ -51,7 +59,7 @@ class Player extends PluginBase implements Listener{
 		$Quit->setQuitMessage("".$gm."§a".$Pl."".$msg."");
 	}
 	public function onDisable(){
-		$this->saveConfig();
+		$this->save();
 		$this->getServer()->getLogger()->info(TextFormat::GREEN . "[ 환영말 ] EGC Plugin stop");
 	}
 }
