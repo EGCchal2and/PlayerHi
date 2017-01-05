@@ -8,6 +8,8 @@ use pocketmine\utils\Config;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\utils\TextFormat;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\command\CommandSender;
+use pocketmine\command\Command;
 class Player extends PluginBase implements Listener{
 	
 	public $plconfig;
